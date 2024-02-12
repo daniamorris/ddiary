@@ -3,6 +3,8 @@
 D Diary
 is an online journal for the IC that presents a daily writing prompt for users. (reminiscent of livejournal in the 2000's) Users can create written entries and read others entries. Users can receive tips in ckBTC, with future options for ckETH, ICP and DEAR. 
 
+View the project running live here: https://ld3bq-aaaaa-aaaan-qluuq-cai.icp0.io/
+
 ## 📦 Create a New Project
 
 Make sure that [Node.js](https://nodejs.org/en/) `>= 16` and [`dfx`](https://internetcomputer.org/docs/current/developer-docs/build/install-upgrade-remove) `>= 0.14` are installed on your system.
