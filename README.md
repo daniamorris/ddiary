@@ -1,7 +1,7 @@
 # ddiary
 
 D Diary
-is an online journal for the IC that presents a daily writing prompt for users. (reminiscent of livejournal in the 2000's) Users can create written entries and read others entries. Users and receive tips in DEAR, ckBTC, ckETH and ICP. 
+is an online journal for the IC that presents a daily writing prompt for users. (reminiscent of livejournal in the 2000's) Users can create written entries and read others entries. Users can receive tips in ckBTC, with future options for ckETH, ICP and DEAR. 
 
 ## 📦 Create a New Project
 
