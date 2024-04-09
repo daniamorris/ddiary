@@ -17,6 +17,7 @@
     "postinstall": "mops install"
   },
   "dependencies": {
+    "@dfinity/identity": "^0.18.1",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
@@ -26,7 +27,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^6.1.6",
-    "unique-names-generator": "^4.7.1"
+    "unique-names-generator": "^4.7.1",
+    "wouter": "^3.0.1"
   },
   "devDependencies": {
     "@dfinity/agent": "^0.18.1",

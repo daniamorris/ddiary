@@ -12,7 +12,7 @@ Make sure that [Node.js](https://nodejs.org/en/) `>= 16` and [`dfx`](https://int
 Run the following commands in a new, empty project directory:
 
 ```sh
-git clone https://github.com/daniamorris/ddiary.git # Download this starter project
+git clone https://github.com/daniamorris/ddiary.git # Download this project
 dfx start --clean --background # Run dfx in the background
 dfx deps deploy # https://internetcomputer.org/docs/current/references/cli-reference/dfx-deps/
 

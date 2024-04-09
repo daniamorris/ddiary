@@ -11,6 +11,9 @@ import CKBTC "mo:ckbtc-types";
 import D "mo:base/Debug";
 import Nat64 "mo:base/Nat64";
 import Result "mo:base/Result";
+import Iter "mo:base/Iter";
+import Array "mo:base/Array";
+// import Buffer "mo:base/Buffer";
 
 actor class Backend() {
 
@@ -124,6 +127,7 @@ actor class Backend() {
     var entries = Map.HashMap<Text, Types.Entry>(5, Text.equal, Text.hash);
     var prompts = Map.HashMap<Text, Types.Prompt>(5, Text.equal, Text.hash);
     var emailList = Map.HashMap<Text, Types.Elist>(5, Text.equal, Text.hash);
+    // let buffer = Buffer.Buffer<Nat>(3); // Creates a new Buffer
     
     stable var profileIdCount: Nat = 0;
     // var profileIdCount: Nat = 0;
@@ -240,7 +244,29 @@ actor class Backend() {
       let entryResult : ?Types.Entry = entries.get(stringId);
       entries.remove(stringId);
     }; 
+
+    public func get_numbers(a: [Nat]) : async [Nat] {
+      let a2 : [Nat] = [0, 1, 2, 3];
+      return a2;
+    };
+
+    public func listEntries () : async [(Text, Types.Entry)] {
+      let entryRes = Iter.toArray<(Text, Types.Entry)>(entries.entries());
+      entryRes
+    };
     
+    // public func listEntriesByProfile (profileID: Text) : async [(Text, Types.Entry)] {
+    //   let entryRes = Iter.toArray<(Text, Types.Entry)>(entries.entries());
+    //   let map2 =
+    //     Map.HashMap.mapFilter<Text, Types.Entry>(
+    //       entries,
+    //       Text.equal,
+    //       Text.hash,
+    //       func (k, v) = if (v != profileID) { null } else { ?(v)}
+    //   );
+    //   map2
+    // };
+
 	//Prompt CRUD
 
     public func createPrompt (prompt : Types.Prompt) : async Text {
