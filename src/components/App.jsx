@@ -1,12 +1,15 @@
 import React from "react";
-import LoggedOut from "./LoggedOut";
+import { Link, Route, useParams } from "wouter";
 import { useAuth, AuthProvider } from "./use-auth-client";
+import LoggedOut from "./LoggedOut";
 import LoggedIn from "./LoggedIn";
 import "../assets/main.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import _default from "@mui/material/styles/identifier";
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import FancyCard from "./FancyCard";
+import Entry from "./Entry";
 
 const defaultTheme = createTheme({
   palette: {
@@ -58,6 +61,11 @@ function App() {
         </section>
       </header>
       <main id="pageContent">
+        {/* <Route path="/ProfilePage/:id">
+          {params => <ProfilePage id={params.id} />}
+        </Route> */}
+        {/* <Route path="/" component={FancyCard} /> */}
+        {/* <Route path="/Support">{isAuthenticated ? <Support loginStatus = {isAuthenticated}/> : <PreSupport loginStatus = {isAuthenticated}/>}</Route> */}
         {isAuthenticated ? <LoggedIn /> : <LoggedOut />}
       </main>
       {/* </Container> */}

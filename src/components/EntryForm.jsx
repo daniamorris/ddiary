@@ -10,17 +10,25 @@ export default function EntryForm({id, prof}) {
 	// var now = new Date(now.getFullYear(), 0, 0);
 	let mytime = 5;
 	const [entry, setEntry] = useState({
-		jid: "",
+		jid: id,
 		title: "",
 		content: "",
 		time: mytime,
 	});
 	const [entryId, setEntryId] = useState("");
-
-	const handleClick = async () => {
-		const whoami = await whoamiActor.whoami();
-		setResult(whoami);
-	  };
+	const handleAnother = (event) => {
+		event.preventDefault();
+		document.getElementById("title").value = "";
+		document.getElementById("content").value = "";
+		setEntryId("")
+		setEntry({
+			jid: id,
+			title: "",
+			content: "",
+			time: mytime,
+		})
+	}
+	const another = <button name="another" onClick={handleAnother}>Create Another Entry</button>;
 
 	const handleEntry = async () => {
 		setLoading(true);
@@ -123,6 +131,7 @@ export default function EntryForm({id, prof}) {
 				<button name="submit" value="submit">{!entryId ? "Create" : "Update"}
 				</button>
         	</form>
+			{entryId && another}
         </div>
     )
 }

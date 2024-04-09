@@ -16,6 +16,7 @@ const whoamiStyles = {
 function LoggedIn() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const [registered, setRegistered] = useState(false);
   const [profileId, setProfileId] = useState();
   const { whoamiActor, logout, principal } = useAuth();
   const myalias = shortName;
@@ -23,38 +24,38 @@ function LoggedIn() {
   const [profile, setProfile] = useState({
     userPrincipal: principal,
     alias: myAlias
-});
+  });
+  let welcomeback = "Welcome back " + profile.alias;
 
-const handleClick = async () => {
-  const whoami = await whoamiActor.whoami();
-  setResult(whoami);
-};
-
-const firstTime = async () => {
-  const getProfileId = await whoamiActor.hasProfile(principal);
-  if (!getProfileId == "" | null){
-    setProfileId(getProfileId);
-    let welcomeback = "Welcome back " + profile.alias;
-    setProfile({
-      userPrincipal: principal,
-      alias: profile.alias
-    })
-    setResult(welcomeback);
-    setRegistered(true);
-  } else {
-    setLoading(true);
-    let profileId = await whoamiActor.createProfile(profile);
-    setProfileId(profileId);
-    setLoading(false);
-  }
-};
-
-  const getMyProfileId = async () => {
-    setLoading(true);
-    const getProfileId = await whoamiActor.hasProfile(principal);
-    setResult(getProfileId);
-    setLoading(false);
+  const handleClick = async () => {
+    const whoami = await whoamiActor.whoami();
+    setResult(whoami);
   };
+
+  const firstTime = async () => {
+    const getProfileId = await whoamiActor.hasProfile(principal);
+    if (!getProfileId == "" | null){
+      setProfileId(getProfileId);
+      setProfile({
+        userPrincipal: principal,
+        alias: profile.alias
+      })
+      setResult(welcomeback);
+      // setRegistered(true);
+    } else {
+      setLoading(true);
+      let profileId = await whoamiActor.createProfile(profile);
+      setProfileId(profileId);
+      setLoading(false);
+    }
+  };
+
+  // const getMyProfileId = async () => {
+  //   setLoading(true);
+  //   const getProfileId = await whoamiActor.hasProfile(principal);
+  //   setResult(getProfileId);
+  //   setLoading(false);
+  // };
 
   const getAddress = async () => {
     // const myaddress = await whoamiActor.getckBTCAddress(principal, subaccount=null);
@@ -64,16 +65,16 @@ const firstTime = async () => {
     setLoading(false);
   };
 
-  const makeProfile = async () => {
-    setLoading(true);
-    const newprofileId = await whoamiActor.createProfile({
-      userPrincipal: principal,
-      alias: myalias
-  });
-    setProfileId(newprofileId);
-    setResult(newprofileId);
-    setLoading(false);
-  };
+  // const makeProfile = async () => {
+  //   setLoading(true);
+  //   const newprofileId = await whoamiActor.createProfile({
+  //     userPrincipal: principal,
+  //     alias: myalias
+  // });
+  //   setProfileId(newprofileId);
+  //   setResult(newprofileId);
+  //   setLoading(false);
+  // };
 
   function setpro(profile){
     setProfile(profile);
@@ -87,7 +88,7 @@ const firstTime = async () => {
   return (
     <div className="container">
       {/* <h1>Internet Identity Client</h1> */}
-      <h2>You are authenticated! {myalias} </h2>
+      <h2>You are authenticated! {profile.alias} </h2>
       <DailyPrompt />
       <EntryForm id={profileId} prof={profile}/>
       {/* <p>Your profile id is: {profileId}</p> */}

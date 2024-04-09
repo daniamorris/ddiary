@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
+import { Link, Route, useParams } from "wouter";
+import { useAuth } from "./use-auth-client";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -10,6 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
+import { pink } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -26,27 +29,53 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function FancyCard() {
+export default function FancyCard(params) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const { whoamiActor } = useAuth(); 
+	// const entryID = params.id;
+	var entryID = "1";
+
+  const [entry, setEntries] = useState([{
+		jid: "0",
+		title: "Pink",
+		content: "I like Pink",
+		//engaged: Feedback;
+		time: 5
+		}]);	
+
+  const userlink = "/ProfilePage/" + [entry[0].jid];
+
+  const getEntry = async () => {
+    const myEntry = await whoamiActor.readEntry(entryID);
+    setEntries(myEntry);
+    console.log(myEntry);
+    };
+
+  useEffect(() => {
+    getEntry();
+  }, []);
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+          <Link href={userlink}>
+          <Avatar sx={{ bgcolor: pink[300] }} aria-label="recipe">
+            DD
           </Avatar>
+          </Link>
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={entry[0].title}
         subheader="September 14, 2016"
       />
       <CardMedia
@@ -57,9 +86,7 @@ export default function FancyCard() {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+        {entry[0].content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
